@@ -16,7 +16,8 @@ public class StackandQueue {
             size++;
         }
     }
-    public void pushElementInStack(Object data){   // creating push method in stack
+    // Uc1 = push elements in stack.
+    public void pushStack(Object data){   // creating push method in stack
         Node newNode = new Node(data);
         if(head == null){                          // check stack is empty or not
             head = newNode;
@@ -28,25 +29,46 @@ public class StackandQueue {
         }
         temp.next = newNode;
     }
-    public void showElements(){
+    //uc2 = pop elements from the stack.
+    public void popStack(){
+        if(head == null){
+            System.out.println("Stack is empty");
+            return;
+        }
+        if(head.next == null){                  // if stack  has only one element then this block will execute.
+            head = null;
+            return;
+        }
+        Node lasttemp = head.next;
+        Node secondLastTemp = head;
+        while (lasttemp.next != null) {
+            lasttemp = lasttemp.next;           // traverse till top of the stack
+            secondLastTemp = secondLastTemp.next;
+        }
+        secondLastTemp.next = null;            // delete the element
+    }
+    // display the stack elements.
+    public void displayElements(){
         if(head == null){
             System.out.println("Linked list is empty");
             return;
         }
         Node temp = head;
         while (temp != null){
-            System.out.print(temp.data +" => ");  //show all elements in stack
+            System.out.print(temp.data +" => ");  //display all elements in stack
             temp = temp.next;
 
         }
         System.out.print("Null");
     }
-
     public static void main(String[] args) {
-        StackandQueue runner = new StackandQueue();
-        runner.pushElementInStack(85);
-        runner.pushElementInStack(24);
-        runner.pushElementInStack(16);
-        runner.showElements();
+        StackAndQueue runner = new StackAndQueue();
+        runner.pushStack(85);
+        runner.pushStack(24);
+        runner.pushStack(16);
+        runner.popStack();
+        runner.popStack();
+        runner.popStack();
+        runner.displayElements();
     }
 }
